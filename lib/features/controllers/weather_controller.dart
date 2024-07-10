@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
+import '../../core/network/remote_service.dart';
+import '../../core/utils/permission_handler.dart';
 import '../models/weather_forecast_model.dart';
 
 class WeatherController extends GetxController {
@@ -19,17 +23,17 @@ class WeatherController extends GetxController {
   RxList<List<String>> dailyData = <List<String>>[].obs;
 
   late bool isLocationGranted;
-  var location;
+  late Position? location;
 
   @override
   void onInit() async {
-    // isLocationGranted =
-    //     await PermissionHandler.checkAndRequestLocationPermission();
-    // if (isLocationGranted) {
-    //   location = await Geolocator.getCurrentPosition();
-    // } else {
-    //   location = await Geolocator.getLastKnownPosition();
-    // }
+    isLocationGranted =
+        await PermissionHandler.checkAndRequestLocationPermission();
+    if (isLocationGranted) {
+      location = await Geolocator.getCurrentPosition();
+    } else {
+      location = await Geolocator.getLastKnownPosition();
+    }
     await getWeatherReport();
     //animationController.forward();
     super.onInit();
@@ -42,8 +46,8 @@ class WeatherController extends GetxController {
     dailyData.clear();
 
     var response = await _remoteService.weatherReport(
-        "${location.latitude},${location.longitude}",
-        "km32MN56LLFjeOdzRy2aGgCz0YFAsbkt");
+        "${location?.latitude},${location?.longitude}",
+        "");
     weatherForecastData.value = weatherForecastModelFromJson(response.body);
 
     weatherForecastData.value.timelines!.hourly!.mapMany((data) {

@@ -1,15 +1,9 @@
-import 'package:demo_projects/features/weather/view/custom_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:demo_projects/features/common_page.dart';
-import 'package:demo_projects/features/weather/view/forecast_data_view.dart';
-import 'package:demo_projects/features/weather/view/top_curve_painter.dart';
 
-import '../controller/weather_controller.dart';
 import '../controllers/weather_controller.dart';
-import '../core/utils/size_config.dart';
-import 'bottom_sheet_painter.dart';
-import 'size_config.dart';
+import '../../core/utils/size_config.dart';
+
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
