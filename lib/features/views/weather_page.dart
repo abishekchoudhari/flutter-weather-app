@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../core/widgets/bottom_sheet_painter.dart';
 import '../../core/widgets/custom_icon_button.dart';
 import '../../core/widgets/forecast_data_view.dart';
+import '../../core/widgets/top_curve_painter.dart';
 import '../controllers/weather_controller.dart';
 import '../../core/utils/size_config.dart';
-
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
@@ -29,20 +30,20 @@ class _WeatherPageState extends State<WeatherPage>
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/background_image.png'),
-            fit: BoxFit.fill,
-          ),
+      width: double.infinity,
+      height: double.infinity,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/background_image.png'),
+          fit: BoxFit.fill,
         ),
-        child: Column(
-          children: [
-            _buildCurrentForecastSection(),
-            _buildForecastSection(context),
-          ],
-        ),
+      ),
+      child: Column(
+        children: [
+          _buildCurrentForecastSection(),
+          _buildForecastSection(context),
+        ],
+      ),
     );
   }
 
