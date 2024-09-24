@@ -46,8 +46,7 @@ class WeatherController extends GetxController {
     dailyData.clear();
 
     var response = await _remoteService.weatherReport(
-        "${location?.latitude},${location?.longitude}",
-        "");
+        "${location?.latitude},${location?.longitude}");
     weatherForecastData.value = weatherForecastModelFromJson(response.body);
 
     weatherForecastData.value.timelines!.hourly!.mapMany((data) {
